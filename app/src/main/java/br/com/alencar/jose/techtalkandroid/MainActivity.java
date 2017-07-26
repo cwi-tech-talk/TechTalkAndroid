@@ -1,9 +1,11 @@
 package br.com.alencar.jose.techtalkandroid;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,6 +19,7 @@ import br.com.alencar.jose.techtalkandroid.async.PokemonApi;
 import br.com.alencar.jose.techtalkandroid.model.BasicItemDTO;
 import br.com.alencar.jose.techtalkandroid.model.BasicListDTO;
 import br.com.alencar.jose.techtalkandroid.util.CallbackActivity;
+import br.com.alencar.jose.techtalkandroid.util.Contants;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -53,6 +56,17 @@ public class MainActivity extends AppCompatActivity implements CallbackActivity<
                 if (hasNext && firstVisibleItem + visibleItemCount == pokemons.size() && !isLoading) {
                     getPokemons();
                 }
+            }
+        });
+
+        lvPokemons.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                BasicItemDTO dto = pokemons.get(position);
+
+                Intent i = new Intent(MainActivity.this, DetailActivity.class);
+                i.putExtra(Contants.BASIC_ITEM_DTO, dto);
+                startActivity(i);
             }
         });
     }

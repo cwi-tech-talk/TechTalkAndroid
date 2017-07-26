@@ -1,10 +1,12 @@
 package br.com.alencar.jose.techtalkandroid.model;
 
+import java.io.Serializable;
+
 /**
  * Created by jose on 25/07/17.
  */
 
-public class BasicItemDTO {
+public class BasicItemDTO implements Serializable {
     private String url;
     private String name;
 

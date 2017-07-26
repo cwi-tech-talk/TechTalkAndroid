@@ -15,6 +15,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import br.com.alencar.jose.techtalkandroid.model.BasicListDTO;
+import br.com.alencar.jose.techtalkandroid.model.Pokemon;
 import br.com.alencar.jose.techtalkandroid.util.CallbackActivity;
 
 /**
@@ -48,6 +49,34 @@ public class PokemonApi {
                             BasicListDTO basicListDTO = gson.fromJson(json.toString(), BasicListDTO.class);
 
                             activity.onSuccess(basicListDTO);
+                        } catch (JSONException je) {
+                            Log.e(LOG_CONTEXT, je.getMessage(), je);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        activity.onError(error);
+                    }
+                }
+        );
+        queue.add(strRequest);
+    }
+
+    public void find(String url) {
+        RequestQueue queue = Volley.newRequestQueue((Context) this.activity);
+        StringRequest strRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject json = new JSONObject(response);
+
+                            Gson gson = new Gson();
+                            Pokemon pokemon = gson.fromJson(json.toString(), Pokemon.class);
+
+                            activity.onSuccess(pokemon);
                         } catch (JSONException je) {
                             Log.e(LOG_CONTEXT, je.getMessage(), je);
                         }
