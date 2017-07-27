@@ -9,3 +9,4 @@ Overview do Treinamento Android
 - Trabalho final
     - [API](https://github.com/dagneserodrigo/moses-api)
     - [APP](https://github.com/dagneserodrigo/moses)
+    - Artigo [Kotlin: Presente ou Futuro?](http://www.androidpro.com.br/kotlin/)
